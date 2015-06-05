@@ -7,3 +7,4 @@ portability:
 other nodes as a basis for deciding where to spawn processes.
 
 * `dist`: code for an abstract model of communication distances.  This will appear shortly.
+
