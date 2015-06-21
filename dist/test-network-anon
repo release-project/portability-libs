@@ -1,0 +1,42 @@
+{network, [
+  {network, [
+     {network, [
+        {network, [
+           {node, 'Anne@ash'}, {node, 'Brian@ash'}, {node, 'Camilla@ash'}
+        ]},
+	{network, [
+           {node, 'Derek@bay'}, {node, 'Eric@bay'}, {node, 'Fiona@bay'}, {node, 'Gerald@bay'}
+	]}
+     ]},  % end of lanA1
+     {network, [
+	{network, [
+           {node, 'Henrietta@cypress'}, {node, 'Iolanthe@cypress'}, {node, 'Joris@cypress'}
+        ]}
+     ]}  % end of lanA2
+ ]},     % end of clusterA
+
+
+ {network, [
+    {network, [
+       {node, 'Aud@Thor'}, {node, 'Egil@Thor'}, {node, 'Njal@Thor'}
+    ]},
+    {network, [
+       {node, 'Achilles@Zeus'}, {node, 'Kalliopi@Zeus'}
+    ]},
+    {network, [
+       {network, [
+          {node, 'Fintan@Lug'}
+       ]}
+     ]}
+ ]},
+
+ {network, [
+    {network, [
+       {network, [
+          {network, [
+             {node, 'deep@C'}
+	   ]}
+        ]}
+     ]}
+ ]}
+]}.

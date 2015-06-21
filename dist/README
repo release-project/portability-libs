@@ -1,0 +1,94 @@
+README for dist.erl
+===================
+
+This library implements a metric space model of distances in a
+hierarchical network of Erlang nodes, as explained in Section 3 of the
+paper in the 'doc' subdirectory.  This is a prototype version of the
+library.
+
+The network is described by an Elrang term as given by the following
+specification:
+
+-type vertex_name () :: atom().
+-type network     () :: {'network', [network()]} 
+		      | {'network', vertex_name(), [network()]} 
+		      | {'node', node()}.
+
+
+This says (taking the cases in reverse order) that a network is one of 
+
+  * An Erlang node, given by its name (an atom, like 'VM1@host022').
+  * A named network which is composed of a list of subnetworks.
+  * An anonymous network which is composed of a list of subnetworks.
+
+Named networks are not strictly necessary, but make it easier to
+construct and read network descriptions (in fact names are required
+internally:names for anonymous networks will be generated
+automatically, but won't usually be visible to the user).  
+
+For example inputs, see the files 'test-network' and 'test-network-anon'.
+Note that a 'network' may actually be a physical machine with one or
+more Erlang VMs running on it.
+
+Before using the library, it must be initialised by calling
+dist:init(Filename), where Filename specifies a file containing a
+network description.  Note that the current version of the library
+stores various structures in the process dictionary, so subprocesses
+will not be able to use the library functions unless they also call
+dist:init/1.  This situation be be improved in a lter version of the
+library (for instance, but implementing a server which processes
+choose_nodes requests or by placing the relevant data in some globally
+visible structure).
+
+The functions exported by the library are as follows.
+
+
+init/1          init (Filename) reads in a network description in the format
+                specified earlier and sets up various internal data structures.
+
+nodenames/0     nodenames() returns the names of all nodes in the network, 
+                in the form of a list of atoms.
+
+render/1        render(Filename) writes a graphical description of the
+                network in the form of a dot file (search for Graphviz). 
+                You can then use a command like 'dot -Tpng <Filename>' 
+                or 'dot -Tsvg <Filename>' on the commandline to produce a 
+                graphics file of the appropriate type.  This can be useful 
+                for debugging.
+
+render/0        render() is the same as render ("network.dot").
+
+distance/2  	distance (Node1, Node2) tells you the distance between two 
+                nodes in the network.  This will either be 0 or a number of 
+                the form 2^(-n) for some n>=0.
+
+max_dist/0      max_dist() is the maximum distance between two nodes in the network
+                This will always be 1.0 in this version of the library, although one 
+                might wish to export a function which tells you the maximum (or 
+                minimum) distance between two nodes in a given list.
+
+min_dist/0      min_dist() is the minimum distance between two distinct nodes in the 
+                network.
+
+choose_nodes/3  choose_nodes(N, L, P) gives the set of nodes in L which satisfy the 
+                predicates in P.  P can be either a single predicate or a list of 
+                predicates.  Individual predicates are of the form {dist, le, 0.8},
+                for example: this would give you all of the nodes in the network whose 
+                distance from N is less than or equal to 0.8.  You can use the usual 
+                comparison operators: lt,le, ge, gt, eq, ne.  If the predicate(s) 
+                cannot be satisfied then an empty list will be returned.
+                
+choose_nodes/2  choose_nodes (N,P) is the same as choose_nodes(N,L,P), where N is 
+                the set of all nodes in the network.
+
+choose_node/3   choose_node(N,L,P) returns a single random element from choose_nodes(N,L,P), 
+                or the atom 'none' if the predicates are unsatisfiable.
+
+choose_node/2   choose_node (N,P) is the same as choose_node(N,L,P), where N is the 
+                set of all nodes in the network.
+
+
+
+
+Kenneth MacKenzie, June 2015
+kwxm@inf.ed.ac.uk

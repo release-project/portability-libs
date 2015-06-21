@@ -1,0 +1,42 @@
+{network, cloud, [
+  {network, clusterA, [
+     {network, lanA1, [
+        {network, machine_ash, [
+           {node, 'Anne@ash'}, {node, 'Brian@ash'}, {node, 'Camilla@ash'}
+        ]},
+	{network, machine_bay, [
+           {node, 'Derek@bay'}, {node, 'Eric@bay'}, {node, 'Fiona@bay'}, {node, 'Gerald@bay'}
+	]}
+     ]},  % end of lanA1
+     {network, lanA2, [
+	{network, machine_cypress, [
+           {node, 'Henrietta@cypress'}, {node, 'Iolanthe@cypress'}, {node, 'Joris@cypress'}
+        ]}
+     ]}  % end of lanA2
+ ]},     % end of clusterA
+
+
+ {network, clusterB, [
+    {network, machine_Thor, [
+       {node, 'Aud@Thor'}, {node, 'Egil@Thor'}, {node, 'Njal@Thor'}
+    ]},
+    {network, machine_Zeus, [
+       {node, 'Achilles@Zeus'}, {node, 'Kalliopi@Zeus'}
+    ]},
+    {network, subnetworkA, [
+       {network, machine_Lug, [
+          {node, 'Fintan@Lug'}
+       ]}
+     ]}
+ ]},
+
+ {network, clusterC, [
+    {network, 'C1', [
+       {network, 'C2', [
+          {network, 'C3', [
+             {node, 'deep@C'}
+	   ]}
+        ]}
+     ]}
+ ]}
+]}.
