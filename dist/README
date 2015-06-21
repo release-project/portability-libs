@@ -23,7 +23,7 @@ This says (taking the cases in reverse order) that a network is one of
 
 Named networks are not strictly necessary, but make it easier to
 construct and read network descriptions (in fact names are required
-internally:names for anonymous networks will be generated
+internally: names for anonymous networks will be generated
 automatically, but won't usually be visible to the user).  
 
 For example inputs, see the files 'test-network' and 'test-network-anon'.
