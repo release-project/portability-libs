@@ -6,7 +6,7 @@ hierarchical network of Erlang nodes, as explained in Section 3 of the
 paper in the 'doc' subdirectory.  This is a prototype version of the
 library.
 
-The network is described by an Elrang term as given by the following
+The network is described by an Erlang term as given by the following
 specification:
 
 -type vertex_name () :: atom().
@@ -35,8 +35,8 @@ dist:init(Filename), where Filename specifies a file containing a
 network description.  Note that the current version of the library
 stores various structures in the process dictionary, so subprocesses
 will not be able to use the library functions unless they also call
-dist:init/1.  This situation be be improved in a lter version of the
-library (for instance, but implementing a server which processes
+dist:init/1.  This situation be be improved in a later version of the
+library (for instance, by implementing a server which processes
 choose_nodes requests or by placing the relevant data in some globally
 visible structure).
 
@@ -52,7 +52,7 @@ nodenames/0     nodenames() returns the names of all nodes in the network,
 render/1        render(Filename) writes a graphical description of the
                 network in the form of a dot file (search for Graphviz). 
                 You can then use a command like 'dot -Tpng <Filename>' 
-                or 'dot -Tsvg <Filename>' on the commandline to produce a 
+                or 'dot -Tsvg <Filename>' on the command line to produce a 
                 graphics file of the appropriate type.  This can be useful 
                 for debugging.
 
